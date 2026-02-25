@@ -24,6 +24,10 @@ public partial class MathDbContext : DbContext
             entity.HasKey(e => e.CalculationId).HasName("PK__MathCalc__57C05F66C31C449B");
 
             entity.Property(e => e.CalculationId).HasColumnName("CalculationID");
+            entity.Property(e => e.FirebaseUuid)
+                .HasMaxLength(512)
+                .IsUnicode(false)
+                .HasColumnName("FirebaseUUID");
             entity.Property(e => e.FirstNumber).HasColumnType("decimal(18, 2)");
             entity.Property(e => e.Result).HasColumnType("decimal(18, 2)");
             entity.Property(e => e.SecondNumber).HasColumnType("decimal(18, 2)");
