@@ -1,5 +1,21 @@
     
 ## Building out Register
+1. Add in the following in the Models folder - 'LoginModel.cs'
+    ```
+    using System.ComponentModel.DataAnnotations;
+
+    namespace MathApp.Models
+    {
+        public class LoginModel
+        {
+            [Required]
+            [EmailAddress]
+            public required string Email { get; set; }
+            [Required]
+            public required string Password { get; set; }
+        }
+    }
+    ```
 
 1. Add in the following to the `AuthController`:
 
