@@ -1,6 +1,8 @@
 using MathApp.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.DataProtection;
+using System.IO;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +22,10 @@ builder.Services.AddSession(options =>
 
 builder.Services.AddDbContext<MathDbContext>(options =>
                 options.UseSqlServer(Environment.GetEnvironmentVariable("Math_DB")));
+
+builder.Services.AddDataProtection()
+        .PersistKeysToFileSystem(new DirectoryInfo("/keys"))
+        .SetApplicationName("MathApp");
 
 var app = builder.Build();
 
