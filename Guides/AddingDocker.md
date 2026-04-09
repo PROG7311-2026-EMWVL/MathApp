@@ -22,6 +22,39 @@ Since we will be using SQL auth (no windows auth in linux which is our container
     ```
     sqlcmd -S host.docker.internal,1433 -U docker -P {your password} -d Math_DB -N -C
     ```
+    To know it works, it should show:
+    ```
+    1 > 
+    ```
+#### Troubleshooting errors
+
+If you have errors in the step above, try these steps:
+* Check if TCP/IP is enabled
+    - Open SQL Server Configuration Manager
+    - Select “Protocols for SQLEXPRESS”
+    - Select TCP/IP
+    - Right click
+    - Enable TCP/IP.
+    - Make sure to restart the SQL Server (SQLEXPRESS) [should be the first one that appears] after the above.
+        - Select SQL Server Services
+        - Restart
+
+* Change Port number of TCP
+    - Set the Port of the TCP/IP
+    - Right click on TCP/IP
+    - Properties
+    - Change the IPAll (TCP Dynamic Ports) to 1433
+    - Make sure to restart the SQL Server (SQLEXPRESS) [should be the first one that appears] after the above.
+        - Select SQL Server Services
+        - Restart
+
+* Check the .docker.internal in the settings on Docker
+    - Click on the Settings icon
+    - In the General Tab
+    - “Under the WSL 2 based engine”
+    - Check/Enable the Add the .docker.internal names to the host’s/etc hosts file
+
+* If none of these work, come see EB.
 
 ### Add the new connection string
 Since your container is not technically your machine (its a container), you need to update your SQL Server Setting and your connection string.
